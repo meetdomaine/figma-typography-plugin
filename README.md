@@ -1,17 +1,14 @@
-# Figma Plugin React Template
+# Figma Typography generator plugin
 
-![62862431-71537f00-bd0e-11e9-85db-d97c0fb729a4](https://user-images.githubusercontent.com/16322616/62862692-46b5f600-bd0f-11e9-93b0-75955d1de8f3.png)
+![image](https://user-images.githubusercontent.com/58891378/202256831-4fdd702e-9cba-4f77-bb9c-c557624b9b21.png)
 
-
-This template contains the react example as shown on [Figma Docs](https://www.figma.com/plugin-docs/intro/), with some structural changes and extra tooling.
+This plugin generates typography styles based on saved text styles within a figma project. It currently only outputs styles for tailwindcss, but vanilla CSS support is in the roadmap. 
 
 ## Quickstart
 * Run `yarn` to install dependencies.
 * Run `yarn build:watch` to start webpack in watch mode.
 * Open `Figma` -> `Plugins` -> `Development` -> `Import plugin from manifest...` and choose `manifest.json` file from this repo.
 
-⭐ To change the UI of your plugin (the react code), start editing [App.tsx](./src/app/components/App.tsx).  
-⭐ To interact with the Figma API edit [controller.ts](./src/plugin/controller.ts).  
 ⭐ Read more on the [Figma API Overview](https://www.figma.com/plugin-docs/api/api-overview/).
 
 ## Toolings
