@@ -28,21 +28,27 @@ const getBaseName = (name) =>
         .replace(/mobile|desktop/gi, '')
         .toLowerCase();
 
-const getFontStyles = (font, isDesktop = false, otherViewportFont = null) => {
+const getFontStyles = (font, isDesktop, currentStyles) => {
+    const styles = font.fontName.style.split(' ');
+    console.log(styles);
+    const fontWeight = styles[0];
+    const fontStyle = styles[1] || '';
     const breakpointModifier = isDesktop ? 'sm:' : '';
-    const name = `${breakpointModifier}text-${font.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
 
-    const shouldShowValue = (value, otherValue) => !isDesktop || value !== otherValue;
+    console.log({currentStyles});
+    // const name = `${breakpointModifier}text-${font.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
+    // currentStyles += name;
 
-    const fontWeight = shouldShowValue(font.fontName.style, otherViewportFont?.fontName?.style)
-        ? ` ${breakpointModifier}font-${font.fontName.style.toLowerCase()}`
-        : '';
+    const shouldShowValue = (value) => !!value && (!isDesktop || !currentStyles.includes(value.toLowerCase()));
 
-    const fontFamily = shouldShowValue(font.fontName.family, otherViewportFont?.fontName?.family)
+    currentStyles += shouldShowValue(fontWeight) ? ` ${breakpointModifier}font-${fontWeight.toLowerCase()}` : '';
+    currentStyles += shouldShowValue(fontStyle) ? ` ${breakpointModifier}${fontStyle.toLowerCase()}` : '';
+
+    const fontFamily = shouldShowValue(font.fontName.family)
         ? ` ${breakpointModifier}font-${getBaseName(font.fontName.family)}`
         : '';
 
-    return `${name}${fontWeight}${fontFamily}`;
+    return currentStyles;
 };
 
 figma.ui.onmessage = async (msg) => {
@@ -99,11 +105,11 @@ figma.ui.onmessage = async (msg) => {
 
                 const getTitle = (font) => removeLeadingTrailingCharacters(getBaseName(font.name));
 
-                return `.${getTitle(font)} {\r @apply ${getFontStyles(font)} ${getFontStyles(
-                    matchingDesktopFont,
-                    true,
-                    font
-                )}; \r}`;
+                let currentStyles = '';
+                currentStyles += getFontStyles(font, false, currentStyles);
+                currentStyles += getFontStyles(matchingDesktopFont, true, currentStyles);
+
+                return `.${getTitle(font)} {\r @apply ${currentStyles}; \r}`;
             });
 
             return result.join('\r');
