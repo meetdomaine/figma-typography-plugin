@@ -35,14 +35,14 @@ const getFontStyles = (font, isDesktop = false, otherViewportFont = null) => {
     const shouldShowValue = (value, otherValue) => !isDesktop || value !== otherValue;
 
     const fontWeight = shouldShowValue(font.fontName.style, otherViewportFont?.fontName?.style)
-        ? `${breakpointModifier}font-${font.fontName.style.toLowerCase()}`
+        ? ` ${breakpointModifier}font-${font.fontName.style.toLowerCase()}`
         : '';
 
     const fontFamily = shouldShowValue(font.fontName.family, otherViewportFont?.fontName?.family)
-        ? `${breakpointModifier}font-${getBaseName(font.fontName.family)}`
+        ? ` ${breakpointModifier}font-${getBaseName(font.fontName.family)}`
         : '';
 
-    return `${name} ${fontWeight} ${fontFamily}`;
+    return `${name}${fontWeight}${fontFamily}`;
 };
 
 figma.ui.onmessage = async (msg) => {
@@ -99,11 +99,11 @@ figma.ui.onmessage = async (msg) => {
 
                 const getTitle = (font) => removeLeadingTrailingCharacters(getBaseName(font.name));
 
-                return `.${getTitle(font)} { @apply ${getFontStyles(font)} ${getFontStyles(
+                return `.${getTitle(font)} {\r @apply ${getFontStyles(font)} ${getFontStyles(
                     matchingDesktopFont,
                     true,
                     font
-                )} }`;
+                )}; \r}`;
             });
 
             return result.join('\r');
