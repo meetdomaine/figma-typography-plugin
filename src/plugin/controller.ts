@@ -6,7 +6,7 @@
 // full browser environment (see documentation).
 
 // This shows the HTML page in "ui.html".
-figma.showUI(__html__, {width: 1000, height: 1000});
+figma.showUI(__html__, {width: 1200, height: 500});
 
 // Calls to "parent.postMessage" from within the HTML page will trigger this
 // callback. The callback will be passed the "pluginMessage" property of the
@@ -86,7 +86,7 @@ figma.ui.onmessage = async (msg) => {
                 };
             });
 
-            return {theme: {fontSize: result}};
+            return JSON.stringify({theme: {fontSize: result}}, null, 2);
         };
 
         const mapTypographyConfig = () => {
@@ -99,14 +99,14 @@ figma.ui.onmessage = async (msg) => {
 
                 const getTitle = (font) => removeLeadingTrailingCharacters(getBaseName(font.name));
 
-                return `.${getTitle(font)} {@apply ${getFontStyles(font)} ${getFontStyles(
+                return `.${getTitle(font)} { @apply ${getFontStyles(font)} ${getFontStyles(
                     matchingDesktopFont,
                     true,
                     font
-                )}}`;
+                )} }`;
             });
 
-            return result.join('<br/>');
+            return result.join('\r');
         };
 
         const mapCSSOutput = () => {};
@@ -114,22 +114,12 @@ figma.ui.onmessage = async (msg) => {
         const result =
             outputType === 'tailwind'
                 ? {
-                      config: {'tailwind.config.js': mapTailwindConfig()},
-                      css: {'typography.css': mapTypographyConfig()},
+                      config: mapTailwindConfig(),
+                      css: mapTypographyConfig(),
                   }
                 : mapCSSOutput();
 
         figma.ui.postMessage(result);
-        // figma.showUI(
-        //   __html__ +
-        //     JSON.stringify(result?.config, null, "\t") +
-        //     "<br/><br/><br/>" +
-        //     JSON.stringify(result?.css, null, "<br/>"),
-        //   {
-        //     width: 1000,
-        //     height: 1000,
-        //   }
-        // );
     }
 };
 
