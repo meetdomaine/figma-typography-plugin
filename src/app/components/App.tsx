@@ -64,7 +64,7 @@ const App = ({}) => {
             </span> */}
 
             {output && (
-                <div>
+                <div className="main-wrapper">
                     <nav className="header">
                         <button
                             type="button"

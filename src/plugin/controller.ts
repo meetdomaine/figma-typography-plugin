@@ -56,6 +56,7 @@ figma.ui.onmessage = async (msg) => {
         await figma.loadFontAsync({family: 'Inter', style: 'Regular'});
 
         const savedTextStyles = figma.getLocalTextStyles();
+
         const {outputType, outputUnits} = msg;
 
         const mapTailwindConfig = () => {
@@ -86,7 +87,9 @@ figma.ui.onmessage = async (msg) => {
                 };
             });
 
-            return JSON.stringify({theme: {fontSize: result}}, null, 2);
+            const stringified = JSON.stringify({fontSize: result}, null, 2);
+
+            return stringified.slice(1, stringified.length - 1);
         };
 
         const mapTypographyConfig = () => {
