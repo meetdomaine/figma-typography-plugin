@@ -68,9 +68,10 @@ button {
     background: #323332;
 }
 
-.header {
+nav {
     display: flex;
-    border: 1px solid green;
+    width: 100%;
+    background: black;
 }
 
 .copy-icon {

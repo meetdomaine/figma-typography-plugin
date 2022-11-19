@@ -34,36 +34,38 @@ const App = ({}) => {
         };
     }, []);
 
+    if (!output) {
+        return null;
+    }
+
     return (
         <div className="main">
-            {output && (
-                <div className="main-wrapper">
-                    <nav className="header">
-                        <button
-                            type="button"
-                            onClick={() => setShowTailwindConfig(true)}
-                            className={`file-name ${showTailwindConfig ? 'selected' : ''}`}
-                        >
-                            <p>tailwind.config.js</p>
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => setShowTailwindConfig(false)}
-                            className={`file-name ${!showTailwindConfig ? 'selected' : ''}`}
-                        >
-                            <p>typography.css</p>
-                        </button>
-                        <CopyIcon value={showTailwindConfig ? output.config : output.css} />
-                        <button type="button" onClick={() => setOutputUnits(outputUnits === 'rem' ? 'px' : 'rem')}>
-                            Toggle output to {outputUnits === 'rem' ? 'pixels' : 'rem'}
-                        </button>
-                        <button onClick={onCancel} className="close">
-                            Close
-                        </button>
-                    </nav>
-                    <textarea spellCheck={false} value={showTailwindConfig ? output.config : output.css} readOnly />
-                </div>
-            )}
+            <div className="main-wrapper">
+                <nav>
+                    <button
+                        type="button"
+                        onClick={() => setShowTailwindConfig(true)}
+                        className={`file-name ${showTailwindConfig ? 'selected' : ''}`}
+                    >
+                        <p>tailwind.config.js</p>
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setShowTailwindConfig(false)}
+                        className={`file-name ${!showTailwindConfig ? 'selected' : ''}`}
+                    >
+                        <p>typography.css</p>
+                    </button>
+                    <CopyIcon value={showTailwindConfig ? output.config : output.css} />
+                    <button type="button" onClick={() => setOutputUnits(outputUnits === 'rem' ? 'px' : 'rem')}>
+                        Toggle output to {outputUnits === 'rem' ? 'pixels' : 'rem'}
+                    </button>
+                    <button onClick={onCancel} className="close">
+                        Close
+                    </button>
+                </nav>
+                <textarea spellCheck={false} value={showTailwindConfig ? output.config : output.css} readOnly />
+            </div>
         </div>
     );
 };
