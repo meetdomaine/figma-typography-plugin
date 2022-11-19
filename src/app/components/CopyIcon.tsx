@@ -1,4 +1,4 @@
-import {copyToClipboard, copyToClipboardAsync} from 'figx';
+import {copyToClipboard} from 'figx';
 import React, {useEffect} from 'react';
 
 const CopyIcon = ({value}) => {
@@ -9,7 +9,7 @@ const CopyIcon = ({value}) => {
             copyToClipboard(value);
             setCopied(true);
         } catch (err) {
-            console.error('Failed to copy!', err);
+            console.error('Failed to copy to clipboard', err);
             setError(true);
         }
     };

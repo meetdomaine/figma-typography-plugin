@@ -20,7 +20,6 @@ const getBaseName = (name) =>
 const round = (x) => parseFloat(x.toFixed(2));
 
 const getFontStyles = (font, isDesktop, currentStyles) => {
-    console.log(font);
     const breakpointModifier = isDesktop ? 'sm:' : '';
     const shouldShowValue = (value) => !!value && (!isDesktop || !currentStyles.includes(value.toLowerCase()));
 
@@ -46,6 +45,22 @@ const getFontStyles = (font, isDesktop, currentStyles) => {
     return (
         currentStyles + parsedName + parsedWeight + parsedStyle + parsedFamily + uppercase + lowercase + originalCase
     );
+};
+
+const getColors = () => {
+    const colors = figma.getLocalPaintStyles();
+
+    const mapped = colors.map((color) => {
+        const {r, g, b} = color.paints[0].color || {};
+        const {name} = color;
+
+        return {
+            key: removeLeadingTrailingCharacters(getBaseName(name)),
+            value: `rgb(${round(r * 255)}, ${round(g * 255)}, ${round(b * 255)})`,
+        };
+    });
+
+    return mapped.reduce((obj, item) => Object.assign(obj, {[item.key]: item.value}), {});
 };
 
 export const mapTailwindConfig = (outputUnits) => {
@@ -76,7 +91,7 @@ export const mapTailwindConfig = (outputUnits) => {
         };
     });
 
-    const stringified = JSON.stringify({fontSize: result}, null, 2);
+    const stringified = JSON.stringify({fontSize: result, colors: getColors()}, null, 2);
 
     return stringified.slice(1, stringified.length - 1).trim();
 };
