@@ -37,32 +37,6 @@ const App = ({}) => {
 
     return (
         <div className="main">
-            {/* <h2>Typography boilerplate</h2> */}
-            {/* <p>
-                This plugin is intended to minimize the time developers spend setting up fonts for development, and
-                reduce the back and forth required between design and developers.
-            </p>
-            <p>Getting Started</p> */}
-            {/* <ol>
-                <li>Save some text styles in your Figma project. (Most projects should already have these)</li>
-                <li>select your output format (Currently only supports tailwind but native css support is coming)</li>
-                <li>select output units (px or rem)</li>
-            </ol> */}
-            {/* <span>
-                <p>Select output (CSS/Tailwind)</p>
-                <select name="output" id="output" disabled>
-                    <option value="tailwind">Tailwind</option>
-                    <option value="css">CSS</option>
-                </select>
-            </span> */}
-            {/* <span className="output-units">
-                <p> output units (px, rem): </p>
-                <select name="units" id="units" onChange={({target: {value}}) => setOutputUnits(value)}>
-                    <option value="rem">rem</option>
-                    <option value="px">pixels</option>
-                </select>
-            </span> */}
-
             {output && (
                 <div>
                     <nav className="header">
