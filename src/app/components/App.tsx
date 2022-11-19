@@ -32,7 +32,6 @@ const App = ({}) => {
         window.onmessage = ({data: {pluginMessage}}) => {
             setOutput(pluginMessage);
         };
-        handleCreate();
     }, []);
 
     return (
