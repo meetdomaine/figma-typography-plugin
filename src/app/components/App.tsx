@@ -65,6 +65,7 @@ const App = ({}) => {
                                 strokeLinecap="round"
                             />
                         </svg>
+                        <p className="sr-only">Close Plugin</p>
                     </button>
                     <button
                         type="button"
@@ -99,7 +100,11 @@ const App = ({}) => {
                             {showColors ? 'Hide' : 'Show'} colors
                         </button>
                     </div>
-                    <textarea spellCheck={false} value={showTailwindConfig ? output.config : output.css} readOnly />
+                    <textarea
+                        spellCheck={false}
+                        value={showTailwindConfig ? output.config : output.css}
+                        onChange={() => {}}
+                    />
                 </div>
             </div>
         </div>
