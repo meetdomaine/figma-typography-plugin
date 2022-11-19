@@ -85,6 +85,12 @@ nav {
     align-items: center;
 }
 
+a {
+    color: white;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
 .toggles-wrapper {
     display: flex;
     gap: 10px;
