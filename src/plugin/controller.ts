@@ -2,12 +2,14 @@ import {mapTypographyConfig, mapTailwindConfig} from './mapOutput';
 
 figma.showUI(__html__, {width: 1200, height: 600});
 
-figma.ui.onmessage = async ({type, outputType, outputUnits}) => {
-    if (type === 'cancel') {
+figma.ui.onmessage = async ({type, outputType, outputUnits, showColors}) => {
+    if (type === 'success-copy') {
+        figma.notify('Copied file contents to clipboard');
+    } else if (type === 'fail-copy') {
+        figma.notify('Failed to copy to clipboard. See console for details');
+    } else if (type === 'close') {
         figma.closePlugin();
-    }
-
-    if (type === 'output-typography') {
+    } else if (type === 'output-typography') {
         if (!figma.getLocalTextStyles()?.length) {
             figma.notify('No saved text styles found. Please ensure text styles are saved');
         }
@@ -17,7 +19,7 @@ figma.ui.onmessage = async ({type, outputType, outputUnits}) => {
             const result =
                 outputType === 'tailwind'
                     ? {
-                          config: mapTailwindConfig(outputUnits),
+                          config: mapTailwindConfig(outputUnits, showColors),
                           css: mapTypographyConfig(),
                       }
                     : {};

@@ -63,7 +63,7 @@ const getColors = () => {
     return mapped.reduce((obj, item) => Object.assign(obj, {[item.key]: item.value}), {});
 };
 
-export const mapTailwindConfig = (outputUnits) => {
+export const mapTailwindConfig = (outputUnits, showColors) => {
     const convertToCurrentUnits = (fontStyle, fontSize) => {
         let value;
         if (typeof fontStyle === 'number') {
@@ -91,7 +91,7 @@ export const mapTailwindConfig = (outputUnits) => {
         };
     });
 
-    const stringified = JSON.stringify({fontSize: result, colors: getColors()}, null, 2);
+    const stringified = JSON.stringify({fontSize: result, colors: showColors ? getColors() : undefined}, null, 2);
 
     return stringified.slice(1, stringified.length - 1).trim();
 };

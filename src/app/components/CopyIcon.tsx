@@ -2,29 +2,34 @@ import {copyToClipboard} from 'figx';
 import React, {useEffect} from 'react';
 
 const CopyIcon = ({value}) => {
-    const [error, setError] = React.useState(false);
     const [copied, setCopied] = React.useState(false);
     const handleOnClick = async () => {
         try {
             copyToClipboard(value);
             setCopied(true);
+            parent.postMessage(
+                {
+                    pluginMessage: {type: 'success-copy'},
+                },
+                '*'
+            );
         } catch (err) {
             console.error('Failed to copy to clipboard', err);
-            setError(true);
+            parent.postMessage(
+                {
+                    pluginMessage: {type: 'fail-copy'},
+                },
+                '*'
+            );
         }
     };
 
     useEffect(() => setCopied(false), [value]);
 
     return (
-        <button type="button" onClick={handleOnClick} className="copy-icon">
-            <p>
-                {error ? 'Failed to' : ''}
-                {!error && copied ? 'Copied ' : 'Copy '}
-                to clipboard
-            </p>
+        <button type="button" onClick={handleOnClick} className="toggle">
             {copied ? (
-                <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="24" height="16" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.3335 3.95684L4.29958 6.92292L10.6668 0.555664" stroke="currentColor" />
                 </svg>
             ) : (
