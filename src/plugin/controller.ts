@@ -28,21 +28,23 @@ const getBaseName = (name) =>
         .replace(/mobile|desktop/gi, '')
         .toLowerCase();
 
-const getFontStyles = (font, isDesktop = false, otherViewportFont = null) => {
+const getFontStyles = (font, isDesktop, currentStyles) => {
     const breakpointModifier = isDesktop ? 'sm:' : '';
-    const name = `${breakpointModifier}text-${font.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
+    const shouldShowValue = (value) => !!value && (!isDesktop || !currentStyles.includes(value.toLowerCase()));
 
-    const shouldShowValue = (value, otherValue) => !isDesktop || value !== otherValue;
+    console.log(currentStyles);
+    const styles = font.fontName.style.split(' ');
+    const fontWeight = styles[0];
+    const fontStyle = styles[1] || '';
 
-    const fontWeight = shouldShowValue(font.fontName.style, otherViewportFont?.fontName?.style)
-        ? ` ${breakpointModifier}font-${font.fontName.style.toLowerCase()}`
-        : '';
-
-    const fontFamily = shouldShowValue(font.fontName.family, otherViewportFont?.fontName?.family)
+    const parsedName = `${breakpointModifier}text-${font.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
+    const parsedWeight = shouldShowValue(fontWeight) ? ` ${breakpointModifier}font-${fontWeight.toLowerCase()}` : '';
+    const parsedStyle = shouldShowValue(fontStyle) ? ` ${breakpointModifier}${fontStyle.toLowerCase()}` : '';
+    const parsedFamily = shouldShowValue(font.fontName.family)
         ? ` ${breakpointModifier}font-${getBaseName(font.fontName.family)}`
         : '';
-
-    return `${name}${fontWeight}${fontFamily}`;
+    console.log({parsedName, parsedWeight, parsedStyle, parsedFamily});
+    return currentStyles + parsedName + parsedWeight + parsedStyle + parsedFamily;
 };
 
 figma.ui.onmessage = async (msg) => {
@@ -89,24 +91,24 @@ figma.ui.onmessage = async (msg) => {
 
             const stringified = JSON.stringify({fontSize: result}, null, 2);
 
-            return stringified.slice(1, stringified.length - 1);
+            return stringified.slice(1, stringified.length - 1).trim();
         };
 
         const mapTypographyConfig = () => {
             const mobileFonts = savedTextStyles.filter((style) => style.name.toLowerCase().includes('mobile'));
+            const desktopFonts = savedTextStyles.filter((style) => style.name.toLowerCase().includes('desktop'));
 
             const result = mobileFonts.map((font) => {
-                const matchingDesktopFont = savedTextStyles.find(({name}) =>
+                const matchingDesktopFont = desktopFonts.find(({name}) =>
                     getBaseName(font.name).includes(getBaseName(name))
                 );
 
                 const getTitle = (font) => removeLeadingTrailingCharacters(getBaseName(font.name));
 
-                return `.${getTitle(font)} {\r @apply ${getFontStyles(font)} ${getFontStyles(
-                    matchingDesktopFont,
-                    true,
-                    font
-                )}; \r}`;
+                let currentStyles = getFontStyles(font, false, '');
+                currentStyles = getFontStyles(matchingDesktopFont, true, currentStyles + ' ');
+
+                return `.${getTitle(font)} {\r @apply ${currentStyles}; \r}`;
             });
 
             return result.join('\r');
