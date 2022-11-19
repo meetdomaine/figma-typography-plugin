@@ -37,7 +37,7 @@ const App = ({}) => {
     return (
         <div className="main">
             {output && (
-                <div>
+                <div className="main-wrapper">
                     <nav className="header">
                         <button
                             type="button"

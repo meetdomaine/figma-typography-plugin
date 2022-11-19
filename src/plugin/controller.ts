@@ -58,6 +58,7 @@ figma.ui.onmessage = async (msg) => {
         await figma.loadFontAsync({family: 'Inter', style: 'Regular'});
 
         const savedTextStyles = figma.getLocalTextStyles();
+
         const {outputType, outputUnits} = msg;
 
         const mapTailwindConfig = () => {
