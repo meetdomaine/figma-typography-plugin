@@ -47,6 +47,10 @@ textarea {
     resize: none;
 }
 
+text-area:focus-visible {
+    outline: 2px solid #5e9ed6;
+}
+
 .output-units {
     display: flex;
     gap: 15px;
@@ -85,10 +89,26 @@ nav {
     align-items: center;
 }
 
+button:focus-visible {
+    outline: 2px solid #5e9ed6;
+}
+
 a {
     color: white;
     margin-left: auto;
     margin-right: 20px;
+}
+a:focus-visible {
+    outline: 2px solid #5e9ed6;
+}
+
+.sr-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
 
 .toggles-wrapper {
@@ -117,6 +137,11 @@ a {
 }
 
 .close:hover {
+    position: relative;
+}
+
+.close:focus-visible {
+    outline: 2px solid #5e9ed6;
     position: relative;
 }
 
