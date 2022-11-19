@@ -80,6 +80,9 @@ const App = ({}) => {
                     >
                         <p>typography.css</p>
                     </button>
+                    <a href="https://github.com/codyscott1/figma-typography-plugin/issues" target="_blank">
+                        Submit an issue
+                    </a>
                 </nav>
                 <div className="output">
                     <div className="toggles-wrapper">
