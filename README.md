@@ -1,6 +1,5 @@
 # Figma Typography generator plugin
-
-![image](https://user-images.githubusercontent.com/58891378/202256831-4fdd702e-9cba-4f77-bb9c-c557624b9b21.png)
+<img width="1198" alt="image" src="https://user-images.githubusercontent.com/58891378/202872826-25f6618a-d5bb-43f1-9648-2e47d6f3e86a.png">
 
 This plugin generates typography styles based on saved text styles within a figma project. It currently only outputs styles for tailwindcss, but vanilla CSS support is in the roadmap. 
 
