@@ -97,16 +97,25 @@ export const mapTailwindConfig = (outputUnits, showColors) => {
 };
 
 export const mapTypographyConfig = () => {
+    let outputArray = [];
     const mobileFonts = savedTextStyles.filter((style) => style.name.toLowerCase().includes('mobile'));
     const desktopFonts = savedTextStyles.filter((style) => style.name.toLowerCase().includes('desktop'));
 
-    const result = mobileFonts.map((font) => {
+    if (!mobileFonts.length || !desktopFonts.length) {
+        outputArray = savedTextStyles;
+    } else {
+        outputArray = mobileFonts;
+    }
+
+    const result = outputArray.map((font) => {
         const matchingDesktopFont = desktopFonts.find(({name}) => getBaseName(font.name).includes(getBaseName(name)));
 
         const getTitle = (font) => removeLeadingTrailingCharacters(getBaseName(font.name));
 
         let currentStyles = getFontStyles(font, false, '');
-        currentStyles = getFontStyles(matchingDesktopFont, true, currentStyles + ' ');
+        if (matchingDesktopFont) {
+            currentStyles = getFontStyles(matchingDesktopFont, true, currentStyles + ' ');
+        }
 
         return `.${getTitle(font)} {\r @apply ${currentStyles}; \r}`;
     });
