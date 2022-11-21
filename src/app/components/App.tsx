@@ -10,11 +10,13 @@ const App = ({}) => {
     const [showColors, setShowColors] = React.useState(true);
     const [output, setOutput] = React.useState('');
     const [showTailwindConfig, setShowTailwindConfig] = React.useState(true);
+    const [customBreakpoint, setCustomBreakpoint] = React.useState('sm');
+    const [showSettings, setShowSettings] = React.useState(false);
 
     const handleCreate = () => {
         parent.postMessage(
             {
-                pluginMessage: {type: 'output-typography', outputType, outputUnits, showColors},
+                pluginMessage: {type: 'output-typography', outputType, outputUnits, showColors, customBreakpoint},
             },
             '*'
         );
@@ -26,7 +28,7 @@ const App = ({}) => {
 
     React.useEffect(() => {
         handleCreate();
-    }, [outputType, outputUnits, showColors]);
+    }, [outputType, outputUnits, showColors, customBreakpoint]);
 
     React.useEffect(() => {
         // This is how we read messages sent from the plugin controller
@@ -89,16 +91,69 @@ const App = ({}) => {
                     <div className="toggles-wrapper">
                         <CopyIcon value={showTailwindConfig ? output.config : output.css} />
 
-                        <button
-                            className="toggle"
-                            type="button"
-                            onClick={() => setOutputUnits(outputUnits === 'rem' ? 'px' : 'rem')}
-                        >
-                            View in {outputUnits === 'rem' ? 'pixels' : 'rem'}
-                        </button>
-                        <button className="toggle" type="button" onClick={() => setShowColors(!showColors)}>
-                            {showColors ? 'Hide' : 'Show'} colors
-                        </button>
+                        {!showSettings ? (
+                            <button type="button" className="toggle" onClick={() => setShowSettings(true)}>
+                                <svg
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path d="M0 5L24 5" stroke="currentColor" />
+                                    <path d="M0 12L24 12" stroke="currentColor" />
+                                    <path d="M0 19L24 19" stroke="currentColor" />
+                                    <circle cx="19.5" cy="4.87189" r="2.5" fill="currentColor" />
+                                    <circle cx="4.5" cy="12" r="2.5" fill="currentColor" />
+                                    <circle cx="12" cy="19.1281" r="2.5" fill="currentColor" />
+                                </svg>
+                            </button>
+                        ) : (
+                            <div className="settings-wrapper">
+                                <button
+                                    className="toggle"
+                                    type="button"
+                                    onClick={() => setOutputUnits(outputUnits === 'rem' ? 'px' : 'rem')}
+                                >
+                                    View in {outputUnits === 'rem' ? 'pixels' : 'rem'}
+                                </button>
+                                <button className="toggle" type="button" onClick={() => setShowColors(!showColors)}>
+                                    {showColors ? 'Hide' : 'Show'} colors
+                                </button>
+                                <div className="breakpoint-wrapper">
+                                    <span className="breakpoint-label">breakpoint</span>
+                                    <input
+                                        type="text"
+                                        className="toggle breakpoint"
+                                        value={customBreakpoint}
+                                        onChange={({target: {value}}) => setCustomBreakpoint(value.trim())}
+                                    />
+                                </div>
+                                <button type="button" className="toggle" onClick={() => setShowSettings(false)}>
+                                    <svg
+                                        width="12"
+                                        height="12"
+                                        viewBox="0 0 26 26"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="close-settings"
+                                    >
+                                        <path
+                                            d="M25 1L1.33997 24.66L25 1Z"
+                                            stroke="currentColor"
+                                            strokeMiterlimit="10"
+                                            strokeLinecap="round"
+                                        />
+                                        <path
+                                            d="M24.66 24.66L1 1L24.66 24.66Z"
+                                            stroke="currentColor"
+                                            strokeMiterlimit="10"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                        )}
                     </div>
                     <textarea
                         spellCheck={false}

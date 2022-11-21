@@ -19,8 +19,8 @@ const getBaseName = (name) =>
 
 const round = (x) => parseFloat(x.toFixed(2));
 
-const getFontStyles = (font, isDesktop, currentStyles) => {
-    const breakpointModifier = isDesktop ? 'sm:' : '';
+const getFontStyles = (font, isDesktop, currentStyles, customBreakpoint) => {
+    const breakpointModifier = isDesktop ? `${customBreakpoint}:` : '';
     const shouldShowValue = (value) => !!value && (!isDesktop || !currentStyles.includes(value.toLowerCase()));
 
     const styles = font.fontName.style.split(' ');
@@ -96,7 +96,7 @@ export const mapTailwindConfig = (outputUnits, showColors) => {
     return stringified.slice(1, stringified.length - 1).trim();
 };
 
-export const mapTypographyConfig = () => {
+export const mapTypographyConfig = (customBreakpoint) => {
     let outputArray = [];
     const mobileFonts = savedTextStyles.filter((style) => style.name.toLowerCase().includes('mobile'));
     const desktopFonts = savedTextStyles.filter((style) => style.name.toLowerCase().includes('desktop'));
@@ -112,9 +112,9 @@ export const mapTypographyConfig = () => {
 
         const getTitle = (font) => removeLeadingTrailingCharacters(getBaseName(font.name));
 
-        let currentStyles = getFontStyles(font, false, '');
+        let currentStyles = getFontStyles(font, false, '', customBreakpoint);
         if (matchingDesktopFont) {
-            currentStyles = getFontStyles(matchingDesktopFont, true, currentStyles + ' ');
+            currentStyles = getFontStyles(matchingDesktopFont, true, currentStyles + ' ', customBreakpoint);
         }
 
         return `.${getTitle(font)} {\r @apply ${currentStyles}; \r}`;
