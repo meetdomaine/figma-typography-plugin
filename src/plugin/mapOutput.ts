@@ -81,7 +81,8 @@ export const mapTailwindConfig = (outputUnits, showColors) => {
         const cleanedName = name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
 
         return {
-            [cleanedName]: [
+            key: cleanedName,
+            value: [
                 convertToCurrentUnits(fontSize, fontSize),
                 {
                     letterSpacing: convertToCurrentUnits(letterSpacing, fontSize),
@@ -91,7 +92,9 @@ export const mapTailwindConfig = (outputUnits, showColors) => {
         };
     });
 
-    const stringified = JSON.stringify({fontSize: result, colors: showColors ? getColors() : undefined}, null, 2);
+    const reduced = result.reduce((obj, item) => Object.assign(obj, {[item.key]: item.value}), {});
+
+    const stringified = JSON.stringify({fontSize: reduced, colors: showColors ? getColors() : undefined}, null, 2);
 
     return stringified.slice(1, stringified.length - 1).trim();
 };
