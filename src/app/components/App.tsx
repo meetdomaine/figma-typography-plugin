@@ -10,11 +10,12 @@ const App = ({}) => {
     const [showColors, setShowColors] = React.useState(true);
     const [output, setOutput] = React.useState('');
     const [showTailwindConfig, setShowTailwindConfig] = React.useState(true);
+    const [customBreakpoint, setCustomBreakpoint] = React.useState('sm');
 
     const handleCreate = () => {
         parent.postMessage(
             {
-                pluginMessage: {type: 'output-typography', outputType, outputUnits, showColors},
+                pluginMessage: {type: 'output-typography', outputType, outputUnits, showColors, customBreakpoint},
             },
             '*'
         );
@@ -26,7 +27,7 @@ const App = ({}) => {
 
     React.useEffect(() => {
         handleCreate();
-    }, [outputType, outputUnits, showColors]);
+    }, [outputType, outputUnits, showColors, customBreakpoint]);
 
     React.useEffect(() => {
         // This is how we read messages sent from the plugin controller
@@ -99,6 +100,16 @@ const App = ({}) => {
                         <button className="toggle" type="button" onClick={() => setShowColors(!showColors)}>
                             {showColors ? 'Hide' : 'Show'} colors
                         </button>
+
+                        <div className="breakpoint-wrapper">
+                            <span className="breakpoint-label">breakpoint</span>
+                            <input
+                                type="text"
+                                className="toggle breakpoint"
+                                value={customBreakpoint}
+                                onChange={({target: {value}}) => setCustomBreakpoint(value.trim())}
+                            />
+                        </div>
                     </div>
                     <textarea
                         spellCheck={false}

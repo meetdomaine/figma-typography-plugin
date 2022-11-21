@@ -2,7 +2,7 @@ import {mapTypographyConfig, mapTailwindConfig} from './mapOutput';
 
 figma.showUI(__html__, {width: 1200, height: 600});
 
-figma.ui.onmessage = async ({type, outputType, outputUnits, showColors}) => {
+figma.ui.onmessage = async ({type, outputType, outputUnits, showColors, customBreakpoint}) => {
     if (type === 'success-copy') {
         figma.notify('Copied file contents to clipboard');
     } else if (type === 'fail-copy') {
@@ -20,7 +20,7 @@ figma.ui.onmessage = async ({type, outputType, outputUnits, showColors}) => {
                 outputType === 'tailwind'
                     ? {
                           config: mapTailwindConfig(outputUnits, showColors),
-                          css: mapTypographyConfig(),
+                          css: mapTypographyConfig(customBreakpoint),
                       }
                     : {};
             figma.ui.postMessage(result);
