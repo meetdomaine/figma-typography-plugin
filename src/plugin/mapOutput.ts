@@ -107,11 +107,14 @@ export const mapTypographyConfig = (customBreakpoint) => {
     let outputArray = [];
     const mobileFonts = savedTextStyles.filter((style) => style.name.toLowerCase().includes('mobile'));
     const desktopFonts = savedTextStyles.filter((style) => style.name.toLowerCase().includes('desktop'));
+    const unsizedFonts = savedTextStyles.filter(
+        (style) => !style.name.toLowerCase().includes('desktop') && !style.name.toLowerCase().includes('mobile')
+    );
 
     if (!mobileFonts.length || !desktopFonts.length) {
         outputArray = savedTextStyles;
     } else {
-        outputArray = mobileFonts;
+        outputArray = [...mobileFonts, ...unsizedFonts];
     }
 
     const result = outputArray.map((font) => {
