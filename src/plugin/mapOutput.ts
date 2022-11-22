@@ -1,3 +1,5 @@
+import {fontWeights} from './constants';
+
 const savedTextStyles = figma.getLocalTextStyles();
 
 const removeLeadingTrailingCharacters = (str) => {
@@ -23,17 +25,18 @@ const getFontStyles = (font, isDesktop, currentStyles, customBreakpoint) => {
     const breakpointModifier = isDesktop ? `${customBreakpoint}:` : '';
     const shouldShowValue = (value) => !!value && (!isDesktop || !currentStyles.includes(value.toLowerCase()));
 
-    const styles = font.fontName.style.split(' ');
+    const styles = getBaseName(font.fontName.style);
+
+    const mappedStyles = fontWeights[styles];
     const {textCase} = font;
-    const fontWeight = styles[0];
-    const fontStyle = styles[1] || '';
 
     const parsedName = `${breakpointModifier}text-${font.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
-    const parsedWeight = shouldShowValue(fontWeight) ? ` ${breakpointModifier}font-${fontWeight.toLowerCase()}` : '';
-    const parsedStyle = shouldShowValue(fontStyle) ? ` ${breakpointModifier}${fontStyle.toLowerCase()}` : '';
-    const parsedFamily = shouldShowValue(font.fontName.family)
+    const parsedWeight = shouldShowValue(mappedStyles[0]) ? ` ${breakpointModifier}${mappedStyles[0]}` : '';
+    const parsedStyle = shouldShowValue(mappedStyles[1]) ? ` ${breakpointModifier}${mappedStyles[1]}` : '';
+    const parsedFamily = shouldShowValue(getBaseName(font.fontName.family))
         ? ` ${breakpointModifier}font-${getBaseName(font.fontName.family)}`
         : '';
+
     const uppercase = textCase === 'UPPER' && shouldShowValue('uppercase') ? ` ${breakpointModifier}uppercase` : '';
 
     const lowercase = textCase === 'LOWER' && shouldShowValue('lowercase') ? ` ${breakpointModifier}lowercase` : '';
@@ -42,9 +45,10 @@ const getFontStyles = (font, isDesktop, currentStyles, customBreakpoint) => {
         textCase === 'ORIGINAL' && (!shouldShowValue('uppercase') || !shouldShowValue('lowercase'))
             ? ` ${breakpointModifier}normal-case`
             : '';
-    return (
-        currentStyles + parsedName + parsedWeight + parsedStyle + parsedFamily + uppercase + lowercase + originalCase
-    );
+
+    const casing = uppercase + lowercase + originalCase;
+
+    return currentStyles + parsedName + parsedWeight + parsedStyle + parsedFamily + casing;
 };
 
 const getColors = () => {
