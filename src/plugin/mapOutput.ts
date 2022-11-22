@@ -37,7 +37,6 @@ const getFontStyles = (font, isDesktop, currentStyles, customBreakpoint) => {
         ? ` ${breakpointModifier}font-${getBaseName(font.fontName.family)}`
         : '';
 
-    console.log(font.fontName.family);
     const uppercase = textCase === 'UPPER' && shouldShowValue('uppercase') ? ` ${breakpointModifier}uppercase` : '';
 
     const lowercase = textCase === 'LOWER' && shouldShowValue('lowercase') ? ` ${breakpointModifier}lowercase` : '';
@@ -46,9 +45,10 @@ const getFontStyles = (font, isDesktop, currentStyles, customBreakpoint) => {
         textCase === 'ORIGINAL' && (!shouldShowValue('uppercase') || !shouldShowValue('lowercase'))
             ? ` ${breakpointModifier}normal-case`
             : '';
-    return (
-        currentStyles + parsedName + parsedWeight + parsedStyle + parsedFamily + uppercase + lowercase + originalCase
-    );
+
+    const casing = uppercase + lowercase + originalCase;
+
+    return currentStyles + parsedName + parsedWeight + parsedStyle + parsedFamily + casing;
 };
 
 const getColors = () => {
