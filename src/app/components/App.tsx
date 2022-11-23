@@ -110,25 +110,34 @@ const App = ({}) => {
                             </button>
                         ) : (
                             <div className="settings-wrapper">
-                                <button
-                                    className="toggle"
-                                    type="button"
-                                    onClick={() => setOutputUnits(outputUnits === 'rem' ? 'px' : 'rem')}
-                                >
-                                    View in {outputUnits === 'rem' ? 'pixels' : 'rem'}
-                                </button>
-                                <button className="toggle" type="button" onClick={() => setShowColors(!showColors)}>
-                                    {showColors ? 'Hide' : 'Show'} colors
-                                </button>
-                                <div className="breakpoint-wrapper">
-                                    <span className="breakpoint-label">breakpoint</span>
-                                    <input
-                                        type="text"
-                                        className="toggle breakpoint"
-                                        value={customBreakpoint}
-                                        onChange={({target: {value}}) => setCustomBreakpoint(value.trim())}
-                                    />
-                                </div>
+                                {showTailwindConfig ? (
+                                    <>
+                                        <button
+                                            className="toggle"
+                                            type="button"
+                                            onClick={() => setOutputUnits(outputUnits === 'rem' ? 'px' : 'rem')}
+                                        >
+                                            View in {outputUnits === 'rem' ? 'pixels' : 'rem'}
+                                        </button>
+                                        <button
+                                            className="toggle"
+                                            type="button"
+                                            onClick={() => setShowColors(!showColors)}
+                                        >
+                                            {showColors ? 'Hide' : 'Show'} colors
+                                        </button>
+                                    </>
+                                ) : (
+                                    <div className="breakpoint-wrapper">
+                                        <span className="breakpoint-label">breakpoint</span>
+                                        <input
+                                            type="text"
+                                            className="toggle breakpoint"
+                                            value={customBreakpoint}
+                                            onChange={({target: {value}}) => setCustomBreakpoint(value.trim())}
+                                        />
+                                    </div>
+                                )}
                                 <button type="button" className="toggle" onClick={() => setShowSettings(false)}>
                                     <svg
                                         width="12"
