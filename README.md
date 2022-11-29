@@ -1,5 +1,5 @@
 # Figma Tailwind generating plugin
-<img width="1198" alt="image" src="https://user-images.githubusercontent.com/58891378/202872826-25f6618a-d5bb-43f1-9648-2e47d6f3e86a.png">
+<img width="1204" alt="image" src="https://user-images.githubusercontent.com/58891378/203209489-087e064c-7062-477d-9d48-e6676490fa75.png">
 
 * Automates tailwindcss font creation by outputting the required values in `tailwind.config.js` and `typography.css`
 * Automates tailwindcss color palette creation from saved paint styles in  `tailwind.config.js`
