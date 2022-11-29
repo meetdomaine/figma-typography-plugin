@@ -29,7 +29,7 @@ figma.ui.onmessage = async ({type, outputType, outputUnits, showColors, customBr
                 'Whoops! Something went wrong. Please try again or check the console for more details. Ensure text styles are saved'
             );
             console.error(
-                "Your fonts could not be generated! Please ensure you have saved text styles. If you're still having issues, please reach out by creating a new issue at https://github.com/codyscott1/figma-typography-plugin/issues . If you could be so kind as to include the error from the console it would be greatly appreciated."
+                "Your fonts could not be generated! Please ensure you have saved text styles. If you're still having issues, please reach out by creating a new issue at https://github.com/halfhelix/figma-typography-plugin/issues ."
             );
             console.error(JSON.stringify(error));
         }

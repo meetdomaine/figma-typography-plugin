@@ -84,15 +84,22 @@ export const mapTailwindConfig = (outputUnits, showColors) => {
     const result = savedTextStyles.map(({name, fontSize, letterSpacing, lineHeight}) => {
         const cleanedName = name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
 
+        if (letterSpacing) {
+            return {
+                key: cleanedName,
+                value: [
+                    convertToCurrentUnits(fontSize, fontSize),
+                    {
+                        letterSpacing: convertToCurrentUnits(letterSpacing, fontSize),
+                        lineHeight: convertToCurrentUnits(lineHeight, fontSize),
+                    },
+                ],
+            };
+        }
+
         return {
             key: cleanedName,
-            value: [
-                convertToCurrentUnits(fontSize, fontSize),
-                {
-                    letterSpacing: convertToCurrentUnits(letterSpacing, fontSize),
-                    lineHeight: convertToCurrentUnits(lineHeight, fontSize),
-                },
-            ],
+            value: [convertToCurrentUnits(fontSize, fontSize), convertToCurrentUnits(lineHeight, fontSize)],
         };
     });
 

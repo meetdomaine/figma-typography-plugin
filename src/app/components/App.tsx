@@ -83,7 +83,7 @@ const App = ({}) => {
                     >
                         <p>typography.css</p>
                     </button>
-                    <a href="https://github.com/codyscott1/figma-typography-plugin/issues" target="_blank">
+                    <a href="https://github.com/halfhelix/figma-typography-plugin/issues" target="_blank">
                         Submit an issue
                     </a>
                 </nav>
