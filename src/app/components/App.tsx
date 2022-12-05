@@ -1,116 +1,76 @@
 import * as React from 'react';
 import '../styles/ui.css';
 import CopyIcon from './CopyIcon';
+import 'figma-plugin-ds/dist/figma-plugin-ds.css';
+import SettingsPanel from './SettingsPanel';
+import CodeOutput from './CodeOutput';
 
 declare function require(path: string): any;
 
 const App = ({}) => {
     const [outputType, setOutputType] = React.useState('tailwind');
-    const [outputUnits, setOutputUnits] = React.useState('rem');
-    const [showColors, setShowColors] = React.useState(true);
-    const [output, setOutput] = React.useState('');
-    const [showTailwindConfig, setShowTailwindConfig] = React.useState(true);
-    const [customBreakpoint, setCustomBreakpoint] = React.useState('sm');
-    const [showSettings, setShowSettings] = React.useState(false);
 
-    const handleCreate = () => {
-        parent.postMessage(
-            {
-                pluginMessage: {type: 'output-typography', outputType, outputUnits, showColors, customBreakpoint},
-            },
-            '*'
-        );
-    };
+    // const [outputUnits, setOutputUnits] = React.useState('rem');
+    // const [showColors, setShowColors] = React.useState(true);
+    // const [output, setOutput] = React.useState('');
+    // const [showTailwindConfig, setShowTailwindConfig] = React.useState(true);
+    // const [customBreakpoint, setCustomBreakpoint] = React.useState('sm');
+    // const [showSettings, setShowSettings] = React.useState(false);
 
-    const handleClose = () => {
-        parent.postMessage({pluginMessage: {type: 'close'}}, '*');
-    };
+    // const handleCreate = () => {
+    //     parent.postMessage(
+    //         {
+    //             pluginMessage: {type: 'output-typography', outputType, outputUnits, showColors, customBreakpoint},
+    //         },
+    //         '*'
+    //     );
+    // };
 
-    React.useEffect(() => {
-        handleCreate();
-    }, [outputType, outputUnits, showColors, customBreakpoint]);
+    // React.useEffect(() => {
+    //     handleCreate();
+    // }, [outputType, outputUnits, showColors, customBreakpoint]);
 
-    React.useEffect(() => {
-        // This is how we read messages sent from the plugin controller
-        window.onmessage = ({data: {pluginMessage}}) => {
-            setOutput(pluginMessage);
-        };
-    }, []);
+    // React.useEffect(() => {
+    //     // This is how we read messages sent from the plugin controller
+    //     window.onmessage = ({data: {pluginMessage}}) => {
+    //         setOutput(pluginMessage);
+    //     };
+    // }, []);
 
-    if (!output) {
-        return null;
-    }
+    // if (!output) {
+    //     return null;
+    // }
 
     return (
         <div className="main">
-            <div className="main-wrapper">
-                <nav>
-                    <button className="close" type="button" onClick={handleClose}>
-                        <svg
-                            width="6"
-                            height="6"
-                            viewBox="0 0 26 26"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="close-cross"
+            {/* <div className="main-wrapper"> */}
+            <SettingsPanel setOutputType={setOutputType} />
+            <CodeOutput />
+            {/* <div className="code-output">
+                    <nav>
+                        <button
+                            type="button"
+                            onClick={() => setShowTailwindConfig(true)}
+                            className={`tab ${showTailwindConfig ? 'selected' : ''}`}
                         >
-                            <path
-                                d="M25 1L1.33997 24.66L25 1Z"
-                                stroke="black"
-                                strokeMiterlimit="10"
-                                strokeLinecap="round"
-                            />
-                            <path
-                                d="M24.66 24.66L1 1L24.66 24.66Z"
-                                stroke="black"
-                                strokeMiterlimit="10"
-                                strokeLinecap="round"
-                            />
-                        </svg>
-                        <p className="sr-only">Close Plugin</p>
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => setShowTailwindConfig(true)}
-                        className={`tab ${showTailwindConfig ? 'selected' : ''}`}
-                    >
-                        <p>tailwind.config.js</p>
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => setShowTailwindConfig(false)}
-                        className={`tab ${!showTailwindConfig ? 'selected' : ''}`}
-                    >
-                        <p>typography.css</p>
-                    </button>
-                    <a href="https://github.com/codyscott1/figma-typography-plugin/issues" target="_blank">
-                        Submit an issue
-                    </a>
-                </nav>
-                <div className="output">
-                    <div className="toggles-wrapper">
+                            <p>tailwind.config.js</p>
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setShowTailwindConfig(false)}
+                            className={`tab ${!showTailwindConfig ? 'selected' : ''}`}
+                        >
+                            <p>typography.css</p>
+                        </button>
+                        <a href="https://github.com/codyscott1/figma-typography-plugin/issues" target="_blank">
+                            Submit an issue
+                        </a>
+                    </nav> */}
+            {/* <div className="toggles-wrapper">
                         <CopyIcon value={showTailwindConfig ? output.config : output.css} />
 
-                        {!showSettings ? (
-                            <button type="button" className="toggle" onClick={() => setShowSettings(true)}>
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path d="M0 5L24 5" stroke="currentColor" />
-                                    <path d="M0 12L24 12" stroke="currentColor" />
-                                    <path d="M0 19L24 19" stroke="currentColor" />
-                                    <circle cx="19.5" cy="4.87189" r="2.5" fill="currentColor" />
-                                    <circle cx="4.5" cy="12" r="2.5" fill="currentColor" />
-                                    <circle cx="12" cy="19.1281" r="2.5" fill="currentColor" />
-                                </svg>
-                            </button>
-                        ) : (
-                            <div className="settings-wrapper">
-                                {showTailwindConfig ? (
+                            <div className="settings-wrapper"> */}
+            {/* {showTailwindConfig ? (
                                     <>
                                         <button
                                             className="toggle"
@@ -137,8 +97,8 @@ const App = ({}) => {
                                             onChange={({target: {value}}) => setCustomBreakpoint(value.trim())}
                                         />
                                     </div>
-                                )}
-                                <button type="button" className="toggle" onClick={() => setShowSettings(false)}>
+                                )} */}
+            {/* <button type="button" className="toggle" onClick={() => setShowSettings(false)}>
                                     <svg
                                         width="12"
                                         height="12"
@@ -160,17 +120,16 @@ const App = ({}) => {
                                             strokeLinecap="round"
                                         />
                                     </svg>
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                    <textarea
-                        spellCheck={false}
-                        value={showTailwindConfig ? output.config : output.css}
-                        onChange={() => {}}
-                    />
-                </div>
-            </div>
+                                </button> */}
+            {/* </div> */}
+
+            {/* </div>     */}
+            {/* <textarea
+                            spellCheck={false}
+                            value={showTailwindConfig ? output.config : output.css}
+                            onChange={() => {}}
+                        />   */}
+            {/* </div> */}
         </div>
     );
 };

@@ -1,17 +1,47 @@
+:root {
+    --space-s: 5px;
+    --space-m: 10px;
+    --space-l: 15px;
+    --space-xl: 20px;
+
+    --color-black: #000000;
+    --color-black-8: rgba(0, 0, 0, 0.8);
+    --color-black-3: rgba(0, 0, 0, 0.3);
+
+    --color-white: #ffffff;
+    --color-white-8: rgba(255, 255, 255, 0.8);
+    --color-white-6: rgba(255, 255, 255, 0.6);
+    --color-white-4: rgba(255, 255, 255, 0.4);
+    --color-white-2: rgba(255, 255, 255, 0.2);
+
+    --color-toolbar: #2c2c2c;
+    --color-hud: #222222;
+    --color-grey: #f0f0f0;
+    --color-silver: #e5e5e5;
+
+    --color-blue: #18a0fb;
+    --color-purple: #7b61ff;
+    --color-pink: #f531b3;
+    --color-green: #1bc47d;
+    --color-red: #f24822;
+    --color-yellow: #ffeb00;
+}
+
 body {
     font: 12px sans-serif;
     margin: 0px;
 }
 
+/* 
 #react-page {
     height: 100%;
-}
-
+} */
+/* 
 p {
     margin: 0px;
-}
+} */
 
-input {
+/* input {
     border: none;
     outline: none;
     padding: 8px;
@@ -27,24 +57,68 @@ button:focus {
 }
 input:focus {
     box-shadow: inset 0 0 0 2px #18a0fb;
-}
+} */
 
 .main {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+    flex-wrap: nowrap;
     height: 100%;
 }
 
-textarea {
+.main .label {
+    color: var(--color-black-8);
+}
+
+.settings-panel {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-grey);
+    flex: 0 0 30%;
+    padding: var(--space-m);
+}
+
+.title_wrapper {
+    border-bottom: 1px solid var(--color-grey);
+    margin-bottom: var(--space-l);
+    padding: var(--space-l) 0;
+}
+
+.code-output {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    flex: 1 1 auto;
+    position: relative;
+    /* background-color: blue; */
+}
+
+.code-output .sticky-button-wrapper {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
-    height: 100%;
-    padding: 10px;
+    padding: var(--space-l);
+}
+
+.code-output .button--clipboard {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.code-output-area {
+    padding: var(--space-l);
     outline: none;
     border: none;
-    background: rgb(35, 31, 32);
+    background: var(--color-toolbar);
     color: white;
     resize: none;
+    flex: 1 0 auto;
 }
 
 text-area:focus-visible {
@@ -62,31 +136,33 @@ text-area:focus-visible {
 }
 .tab {
     border-radius: 6px 6px 0 0;
-    font-size: 14px;
-    text-align: left;
-    padding: 8px 20px 8px 10px;
+    padding: var(--space-s) var(--space-l);
     margin-bottom: 0;
-    background: black;
     border: 0;
-    color: white;
+    color: var(--color-white-4);
     border-bottom: 0;
     outline: none;
+    background-color: unset;
+    border-bottom: 0px solid var(--color-white);
+    cursor: pointer;
 }
 
 .tab:hover {
-    background: rgb(25, 25, 23);
+    color: var(--color-white-6);
 }
 
-.selected {
-    background: rgb(35, 31, 32);
+.tab.selected {
+    border-color: var(--color-white);
+    color: var(--color-grey);
+    /* font-weight: 600; */
 }
 
 nav {
     padding-top: 4px;
     display: flex;
-    width: 100%;
-    background: black;
+    background: var(--color-toolbar);
     align-items: center;
+    border-bottom: 1px solid var(--color-white-2);
 }
 
 button:focus-visible {

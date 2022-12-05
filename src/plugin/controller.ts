@@ -1,6 +1,6 @@
 import {mapTypographyConfig, mapTailwindConfig} from './mapOutput';
 
-figma.showUI(__html__, {width: 1200, height: 600});
+figma.showUI(__html__, {width: 800, height: 400});
 
 figma.ui.onmessage = async ({type, outputType, outputUnits, showColors, customBreakpoint}) => {
     if (type === 'success-copy') {
