@@ -1,63 +1,6 @@
-:root {
-    --space-s: 5px;
-    --space-m: 10px;
-    --space-l: 15px;
-    --space-xl: 20px;
-
-    --color-black: #000000;
-    --color-black-8: rgba(0, 0, 0, 0.8);
-    --color-black-3: rgba(0, 0, 0, 0.3);
-
-    --color-white: #ffffff;
-    --color-white-8: rgba(255, 255, 255, 0.8);
-    --color-white-6: rgba(255, 255, 255, 0.6);
-    --color-white-4: rgba(255, 255, 255, 0.4);
-    --color-white-2: rgba(255, 255, 255, 0.2);
-
-    --color-toolbar: #2c2c2c;
-    --color-hud: #222222;
-    --color-grey: #f0f0f0;
-    --color-silver: #e5e5e5;
-
-    --color-blue: #18a0fb;
-    --color-purple: #7b61ff;
-    --color-pink: #f531b3;
-    --color-green: #1bc47d;
-    --color-red: #f24822;
-    --color-yellow: #ffeb00;
-}
-
 body {
-    font: 12px sans-serif;
     margin: 0px;
 }
-
-/* 
-#react-page {
-    height: 100%;
-} */
-/* 
-p {
-    margin: 0px;
-} */
-
-/* input {
-    border: none;
-    outline: none;
-    padding: 8px;
-}
-input:hover {
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
-}
-button:focus {
-    outline: none;
-}
-#create:focus {
-    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);
-}
-input:focus {
-    box-shadow: inset 0 0 0 2px #18a0fb;
-} */
 
 .main {
     display: flex;
@@ -66,203 +9,92 @@ input:focus {
     align-items: stretch;
     flex-wrap: nowrap;
     height: 100%;
-}
-
-.main .label {
-    color: var(--color-black-8);
+    background-color: var(--figma-color-bg);
+    color: var(--figma-color-text);
 }
 
 .settings-panel {
     display: flex;
     flex-direction: column;
-    background-color: var(--color-grey);
     flex: 0 0 30%;
-    padding: var(--space-m);
+    height: 100%;
+    overflow-y: auto;
+    /* padding: var(--space-m); */
+    border-right: 1px solid var(--figma-color-border);
 }
 
-.title_wrapper {
-    border-bottom: 1px solid var(--color-grey);
-    margin-bottom: var(--space-l);
-    padding: var(--space-l) 0;
-}
-
-.code-output {
+.output-panel {
     display: flex;
     flex-direction: column;
     justify-content: stretch;
-    flex: 1 1 auto;
+    flex: 0 1 70%;
     position: relative;
-    /* background-color: blue; */
 }
 
-.code-output .sticky-button-wrapper {
+.output-panel .sticky-button-wrapper {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100%;
-    padding: var(--space-l);
+    padding: var(--space-s);
 }
 
-.code-output .button--clipboard {
+.output-panel .button--clipboard {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.code-output-area {
+.output-panel .code-output {
     padding: var(--space-l);
     outline: none;
     border: none;
-    background: var(--color-toolbar);
-    color: white;
+    background: var(--figma-color-bg-secondary);
+    color: var(--figma-color-text-secondary);
     resize: none;
     flex: 1 0 auto;
 }
 
-text-area:focus-visible {
-    outline: 2px solid #5e9ed6;
-}
-
-.output-units {
+.output-tabs {
     display: flex;
-    gap: 15px;
-}
-
-.output {
-    height: 100%;
-    position: relative;
-}
-.tab {
-    border-radius: 6px 6px 0 0;
-    padding: var(--space-s) var(--space-l);
-    margin-bottom: 0;
-    border: 0;
-    color: var(--color-white-4);
-    border-bottom: 0;
-    outline: none;
-    background-color: unset;
-    border-bottom: 0px solid var(--color-white);
-    cursor: pointer;
-}
-
-.tab:hover {
-    color: var(--color-white-6);
-}
-
-.tab.selected {
-    border-color: var(--color-white);
-    color: var(--color-grey);
-    /* font-weight: 600; */
-}
-
-nav {
-    padding-top: 4px;
-    display: flex;
-    background: var(--color-toolbar);
+    background: var(--figma-color-bg);
+    justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--color-white-2);
+    border-bottom: 1px solid var(--figma-color-border);
+    color: var(--figma-color-text-secondary);
+    padding-right: var(--space-s);
 }
 
-button:focus-visible {
-    outline: 2px solid #5e9ed6;
-}
-
-a {
-    color: white;
-    margin-left: auto;
-    margin-right: 20px;
-}
-a:focus-visible {
-    outline: 2px solid #5e9ed6;
-}
-
-.sr-only {
-    position: absolute;
-    left: -10000px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-}
-
-.toggles-wrapper {
-    display: flex;
-    gap: 10px;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-.toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-}
-
-.close {
-    width: 12px;
-    height: 12px;
-    background: #ff605c;
-    border-radius: 100%;
-    border: none;
-    margin-right: 15px;
-    margin-left: 15px;
-}
-
-.close:hover {
-    position: relative;
-}
-
-.close:focus-visible {
-    outline: 2px solid #5e9ed6;
-    position: relative;
-}
-
-.close-cross {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.close-settings {
-    color: black;
-}
-
-.main-wrapper {
+.panel-toggle {
+    /* border-top: 1px solid var(--figma-color-border); */
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-bottom: 1px solid var(--figma-color-border);
+    
 }
 
-.breakpoint-wrapper {
-    position: relative;
-    height: 50px;
+.panel-toggle-button .icon {
+    color: inherit;
+    width: var(--icon-size);
+    height: var(--icon-size);
 }
 
-.breakpoint {
-    text-align: center;
-    height: 100%;
-    cursor: text;
-}
-
-.breakpoint-label {
-    position: absolute;
-    color: white;
-    top: -20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    cursor: default;
-}
-
-.settings-wrapper {
+.panel-toggle-button {
     display: flex;
-    flex-direction: column-reverse;
-    gap: 25px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    padding: var(--space-xs) var(--space-s);
+}
+
+.panel-toggle-options {
+    padding: var(--space-xs) var(--space-s);
 }
