@@ -27,6 +27,14 @@ const Icon = (props: IconProps) => {
                 </svg>
 
             )
+        case 'check':
+            return (
+                <svg className="icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM7.91107 10.8654L11.9111 6.36553L11.0889 5.63472L7.47645 9.69865L4.8889 7.11121L4.1111 7.88904L7.1111 10.8889L7.52355 11.3014L7.91107 10.8654Z" fill="currentColor" />
+                </svg>
+
+
+            )
     }
 
     return null

@@ -5,27 +5,29 @@
     --space-l: 32px;
     --space-xl: 40px;
 
-    --color-black: rgba(0, 0, 0, 1);
+    /* --color-black: rgba(0, 0, 0, 1);
     --color-black-8: rgba(0, 0, 0, 0.8);
-    --color-black-3: rgba(0, 0, 0, 0.3);
+    --color-black-3: rgba(0, 0, 0, 0.3); */
 
-    --color-white: #ffffff;
+    /* --color-white: #ffffff;
     --color-white-8: rgba(255, 255, 255, 0.8);
     --color-white-6: rgba(255, 255, 255, 0.6);
     --color-white-4: rgba(255, 255, 255, 0.4);
-    --color-white-2: rgba(255, 255, 255, 0.2);
+    --color-white-2: rgba(255, 255, 255, 0.2); */
 
-    --color-toolbar: #2c2c2c;
+    /* --color-toolbar: #2c2c2c;
     --color-hud: #222222;
     --color-grey: #f0f0f0;
-    --color-silver: #e5e5e5;
+    --color-silver: #e5e5e5; */
 
-    --color-blue: #18a0fb;
+    /* --color-blue: #18a0fb;
     --color-purple: #7b61ff;
     --color-pink: #f531b3;
     --color-green: #1bc47d;
     --color-red: #f24822;
-    --color-yellow: #ffeb00;
+    --color-yellow: #ffeb00; */
+
+    --color-focus: #18A0FB;
 
     --icon-size-large: 32px;
     --icon-size: 12px;
@@ -45,8 +47,8 @@ html {
     font-size: 12px;
     line-height: 16px;
     font-weight: 400;
-    letter-spacing: 0%;
-    color: var(--color-black);
+    letter-spacing: 0em;
+    color: var(--figma-color-text);
 }
 
 
@@ -57,37 +59,37 @@ a {
 }
 
 a:focus-visible {
-    outline: 2px solid var(--color-brand);
+    outline: 2px solid var(--figma-color-text);
 }
 
 .text--xs {
     font-size: 10px;
     line-height: 16px;
-    letter-spacing: 1%;
+    letter-spacing: 0.01em;
 }
 
 .text--s {
     font-size: 11px;
     line-height: 16px;
-    letter-spacing: 0.5%;
+    letter-spacing: 0.005em;
 }
 
 .text--m {
     font-size: 12px;
     line-height: 16px;
-    letter-spacing: 0%;
+    letter-spacing: 0em;
 }
 
 .text--l {
     font-size: 13px;
     line-height: 24px;
-    letter-spacing: -0.25%;
+    letter-spacing: -0.0025em;
 }
 
 .text--xl {
     font-size: 14px;
     line-height: 24px;
-    letter-spacing: -0.6%;
+    letter-spacing: -0.006em;
 }
 
 .text--regular {
@@ -103,7 +105,7 @@ a:focus-visible {
 }
 
 .section-title {
-    color: var(--color-black);
+    color: var(--figma-color-text);
     margin-bottom: var(--space-s);
 }
 
@@ -183,7 +185,7 @@ input[type="radio"] + label,
 input[type="checkbox"] + label {
     font-size: 11px;
     line-height: 16px;
-    letter-spacing: 0.5%;
+    letter-spacing: 0.005em;
     font-weight: 400;
     color: var(--figma-color-text);
 }
@@ -234,7 +236,7 @@ input[type=range]::-webkit-slider-runnable-track {
     position: relative;
     width: 100%;
     height: 1px;
-    padding: var(--space-xs);
+    padding: var(--space-xs) 0;
     cursor: pointer;
     background: transparent;
 }
@@ -252,16 +254,32 @@ input[type=range]::after {
 }
 
 input[type=range]::-webkit-slider-thumb {
+    position: relative;
     appearance: none;
     -webkit-appearance: none;
-    border: 2px solid var(--figma-color-bg-secondary);
-    height: 10px;
-    width: 10px;
+    height: 11px;
+    width: 11px;
     border-radius: 100%;
     background: var(--figma-color-text);
     cursor: pointer;
-    margin-top: -5px;
+    margin: -5.5px 0 0 0;
     z-index: 1;
+    border: 1px solid var(--figma-color-bg);
+}
+
+input[type=range]:focus-visible:-webkit-slider-thumb {
+    background: var(--color-focus);
+}
+
+input[type=range]::-webkit-slider-thumb::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    bottom: -10px;
+    left: -10px;
+    background-color: var(--figma-color-bg);
+    z-index: 2;
 }
 
 .range_label_wrapper {
@@ -301,9 +319,10 @@ input[type=text]:focus-visible {
     font-size: 11px;
     font-weight: 500;
     line-height: 16px;
-    letter-spacing: 0.5%;
+    letter-spacing: 0.005em;
     padding: 7px 12px;
     cursor: pointer;
+    transition: all var(--easing-default);
 }
 
 .button .icon {
@@ -336,7 +355,7 @@ button:focus-visible {
     font-size: 11px;
     font-weight: 500;
     line-height: 16px;
-    letter-spacing: 0.5%;
+    letter-spacing: 0.005em;
     padding: 0;
     margin: 0;
     line-height: 1;

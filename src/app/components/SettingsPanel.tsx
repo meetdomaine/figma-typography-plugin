@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PanelToggle from './PanelToggle';
-// import { selectMenu } from 'figma-plugin-ds';
 import stringLookup from './StringLookup'
 
 interface SettingsProps {
@@ -16,6 +15,8 @@ interface SettingsProps {
     setBreakpointName: React.Dispatch<React.SetStateAction<string>>,
     breakpointSize: number,
     setBreakpointSize: React.Dispatch<React.SetStateAction<number>>,
+    showFontImports: boolean,
+    setShowFontImports: React.Dispatch<React.SetStateAction<boolean>>,
     showColorUnits: boolean,
     setShowColorUnits: React.Dispatch<React.SetStateAction<boolean>>,
     colorUnits: string,
@@ -37,7 +38,7 @@ const SettingsPanel = (props: SettingsProps) => {
     return (
         <div className="settings-panel">
 
-            <PanelToggle
+            {/* <PanelToggle
                 title="Output"
                 active
             >
@@ -74,7 +75,7 @@ const SettingsPanel = (props: SettingsProps) => {
                         </label>
                     </div>
                 </div>
-            </PanelToggle>
+            </PanelToggle> */}
 
 
             <PanelToggle
@@ -83,9 +84,9 @@ const SettingsPanel = (props: SettingsProps) => {
                 toggle={props.setShowTextStyles}
             >
                 <div className="input_group">
-                    <div className="label">Units</div>
+                    {/* <div className="label">Units</div> */}
 
-                    <div className="inputs_inline">
+                    {/* <div className="inputs_inline">
                         <div className="radio">
                             <input 
                                 id="radio_rem" 
@@ -103,7 +104,7 @@ const SettingsPanel = (props: SettingsProps) => {
                             <input 
                                 id="radio_px" 
                                 type="radio"
-                                value="Vanilla CSS" 
+                                value={stringLookup.px}
                                 name="fontUnits" 
                                 checked={props.fontUnits == stringLookup.px}
                                 onChange={() => null}
@@ -111,10 +112,10 @@ const SettingsPanel = (props: SettingsProps) => {
                             />
                             <label htmlFor="radio_px" className="radio__label">px</label>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
-                {props.fontUnits == stringLookup.rem ? (
+                {/* {props.fontUnits == stringLookup.rem ? (
                     <div className="input_group">
                         <div className="range">
                             <div className="range_label_wrapper">
@@ -132,7 +133,7 @@ const SettingsPanel = (props: SettingsProps) => {
                             />
                         </div>
                     </div>
-                ) : ''}
+                ) : ''} */}
 
                 {props.outputType == stringLookup.tailwind ? (
                     <div className="input_group">
@@ -142,33 +143,46 @@ const SettingsPanel = (props: SettingsProps) => {
                                 id="breakpoint_name" 
                                 type="text" 
                                 placeholder={props.breakpointName}
+                                value={props.breakpointName}
                                 className="input__field"
                                 onChange={e => props.setBreakpointName(e.target.value)}
                             />
                         </div>
-                    </div> ) : (
-                    <div className="input_group">
-                        <div className="range">
-                            <div className="range_label_wrapper">
-                                <label htmlFor="breakpoint_size" className="label">Breakpoint Size</label>
-                                <output className="range_value text--s">{props.breakpointSize}</output><p className="range_unit text--s">px</p>
-                            </div>
-                            <input 
-                                id="breakpoint_size" 
-                                type="range" 
-                                className="input__field" 
-                                min="375" 
-                                max="1024" 
-                                defaultValue={props.breakpointSize}
-                                onChange={e => props.setBreakpointSize(parseInt(e.target.value, 10))}
-                            />
-                        </div>
-                    </div>
+                    </div> ) : ( ''
+                    // <div className="input_group">
+                    //     <div className="range">
+                    //         <div className="range_label_wrapper">
+                    //             <label htmlFor="breakpoint_size" className="label">Breakpoint Size</label>
+                    //             <output className="range_value text--s">{props.breakpointSize}</output><p className="range_unit text--s">px</p>
+                    //         </div>
+                    //         <input 
+                    //             id="breakpoint_size" 
+                    //             type="range" 
+                    //             className="input__field" 
+                    //             min="375" 
+                    //             max="1024" 
+                    //             defaultValue={props.breakpointSize}
+                    //             onChange={e => props.setBreakpointSize(parseInt(e.target.value, 10))}
+                    //         />
+                    //     </div>
+                    // </div>
                     )}
+
+                {/* <div className="switch">
+                    <input 
+                        className="switch__toggle" 
+                        type="checkbox" 
+                        id="include_font_imports" 
+                        checked={props.showFontImports}
+                        onChange={() => null}
+                        onClick={() => {props.setShowFontImports(!props.showFontImports)}}
+                    />
+                    <label className="switch__label" htmlFor="include_font_imports">Include Font Imports</label>
+                </div> */}
 
             </PanelToggle>
 
-            <PanelToggle 
+            {/* <PanelToggle 
                 title="Color Styles"
                 active={props.showColorUnits}
                 toggle={props.setShowColorUnits}
@@ -186,7 +200,7 @@ const SettingsPanel = (props: SettingsProps) => {
                             onClick={() => {props.setColorUnits(stringLookup.hex)}}
                         />
                         <label htmlFor="radio_hex" className="radio__label">
-                            HEX
+                            hex
                         </label>
                     </div>
 
@@ -202,7 +216,7 @@ const SettingsPanel = (props: SettingsProps) => {
                             onClick={() => {props.setColorUnits(stringLookup.hsl)}}
                         />
                         <label htmlFor="radio_hsl" className="radio__label">
-                            HSL
+                            hsl
                         </label>
                     </div>
 
@@ -218,13 +232,13 @@ const SettingsPanel = (props: SettingsProps) => {
                             onClick={() => {props.setColorUnits(stringLookup.rgba)}}
                         />
                         <label htmlFor="radio_rgba" className="radio__label">
-                            RGBA
+                            rgb
                         </label>
                     </div>
                 </div>
-            </PanelToggle>
+            </PanelToggle> */}
 
-            <PanelToggle 
+            {/* <PanelToggle 
                 title="Effect Styles"
                 active={props.showEffects}
                 toggle={props.setShowEffects}
@@ -239,7 +253,7 @@ const SettingsPanel = (props: SettingsProps) => {
                         onChange={() => null}
                         onClick={() => {props.setShowInnerShadows(!props.showInnerShadows)}}
                     />
-                    <label className="switch__label" htmlFor="include_colors">Inner Shadows</label>
+                    <label className="switch__label" htmlFor="include_inner_shadows">Inner Shadows</label>
                 </div>
 
                 <div className="switch">
@@ -278,7 +292,7 @@ const SettingsPanel = (props: SettingsProps) => {
                     <label className="switch__label" htmlFor="include_background_blur">Background Blur</label>
                 </div>
 
-            </PanelToggle>
+            </PanelToggle> */}
 
             {/* <PanelToggle title="Form Styles"></PanelToggle> */}
 

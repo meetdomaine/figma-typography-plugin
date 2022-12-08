@@ -10,11 +10,12 @@ import stringLookup from './StringLookup';
 const App = ({}) => {
 
     const [outputType, setOutputType] = React.useState<string>(stringLookup.tailwind);
-    const [showTextStyles, setShowTextStyles] = React.useState<boolean>(false);
+    const [showTextStyles, setShowTextStyles] = React.useState<boolean>(true);
     const [fontUnits, setFontUnits] = React.useState<string>(stringLookup.rem);
     const [fontBaseSize, setFontBaseSize] = React.useState<number>(16);
     const [breakpointName, setBreakpointName] = React.useState<string>('sm');
     const [breakpointSize, setBreakpointSize] = React.useState<number>(768);
+    const [showFontImports, setShowFontImports] = React.useState<boolean>(false);
     const [showColorUnits, setShowColorUnits] = React.useState<boolean>(false);
     const [colorUnits, setColorUnits] = React.useState<string>(stringLookup.hex);
     const [showEffects, setShowEffects] = React.useState<boolean>(false);
@@ -38,6 +39,8 @@ const App = ({}) => {
                 setBreakpointName = {setBreakpointName}
                 breakpointSize = {breakpointSize}
                 setBreakpointSize = {setBreakpointSize}
+                showFontImports = {showFontImports}
+                setShowFontImports = {setShowFontImports}
                 showColorUnits = {showColorUnits}
                 setShowColorUnits = {setShowColorUnits}
                 colorUnits = {colorUnits}
@@ -60,6 +63,7 @@ const App = ({}) => {
                 fontBaseSize = {fontBaseSize}
                 breakpointName = {breakpointName}
                 breakpointSize = {breakpointSize}
+                showFontImports = {showFontImports} 
                 showColorUnits = {showColorUnits}
                 colorUnits = {colorUnits}
                 showEffects = {showEffects}
