@@ -1,39 +1,37 @@
 import * as React from 'react';
-import Icon from './Icon';
+import Icon from './Icons';
 import {copyToClipboard} from 'figx';
 
 interface Output {
-    config? : any,
-    css? : any
+    config?: any;
+    css?: any;
 }
 
 interface CodeOutputProps {
-    outputType: string,
-    showTextStyles: boolean,
-    fontUnits: string,
-    fontBaseSize: number,
-    breakpointName: string,
-    breakpointSize: number,
-    showFontImports: boolean,
-    showColorUnits: boolean,
-    colorUnits: string,
-    showEffects: boolean,
-    showInnerShadows: boolean,
-    showDropShadows: boolean,
-    showLayerBlur: boolean,
-    showBackgroundBlur: boolean,
+    outputType: string;
+    showTextStyles: boolean;
+    fontUnits: string;
+    fontBaseSize: number;
+    breakpointName: string;
+    breakpointSize: number;
+    showFontImports: boolean;
+    showColorUnits: boolean;
+    colorUnits: string;
+    showEffects: boolean;
+    showInnerShadows: boolean;
+    showDropShadows: boolean;
+    showLayerBlur: boolean;
+    showBackgroundBlur: boolean;
 }
 
 const CodeOutput = (props: CodeOutputProps) => {
-    
     const [output, setOutput] = React.useState<Output>();
     const [showTailwindConfig, setShowTailwindConfig] = React.useState(true);
     const [copiedToClipboard, setCopiedToClipboard] = React.useState(false);
 
     const handleOnClick = async () => {
-
-        let value
-        showTailwindConfig ? value = output.config : value = output.css
+        let value;
+        showTailwindConfig ? (value = output.config) : (value = output.css);
 
         try {
             copyToClipboard(value);
@@ -64,7 +62,13 @@ const CodeOutput = (props: CodeOutputProps) => {
     const handleCreate = () => {
         parent.postMessage(
             {
-                pluginMessage: {type: 'output-typography', outputType: props.outputType, outputUnits: props.fontUnits, showColors: props.showColorUnits, customBreakpoint: props.breakpointName},
+                pluginMessage: {
+                    type: 'output-typography',
+                    outputType: props.outputType,
+                    outputUnits: props.fontUnits,
+                    showColors: props.showColorUnits,
+                    customBreakpoint: props.breakpointName,
+                },
             },
             '*'
         );
@@ -104,7 +108,11 @@ const CodeOutput = (props: CodeOutputProps) => {
                         typography.css
                     </button>
                 </div>
-                <a className="text--s" href="https://github.com/codyscott1/figma-typography-plugin/issues" target="_blank">
+                <a
+                    className="text--s"
+                    href="https://github.com/codyscott1/figma-typography-plugin/issues"
+                    target="_blank"
+                >
                     Submit an Issue
                 </a>
             </nav>
@@ -130,8 +138,11 @@ const CodeOutput = (props: CodeOutputProps) => {
                 onChange={() => {}}
             />
             <div className="sticky-button-wrapper">
-                <button className={`button button--primary button--clipboard ${copiedToClipboard ? 'copied' : ''}`} onClick={handleOnClick}>
-                    {copiedToClipboard ? <Icon icon="check" /> : <Icon icon="link" />}
+                <button
+                    className={`button button--primary button--clipboard ${copiedToClipboard ? 'copied' : ''}`}
+                    onClick={handleOnClick}
+                >
+                    <Icon type={copiedToClipboard ? 'check' : 'link'} />
                     {copiedToClipboard ? 'Copied to Clipboard' : 'Copy to Clipboard'}
                 </button>
             </div>

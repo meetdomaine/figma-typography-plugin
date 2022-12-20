@@ -73,7 +73,6 @@ body {
     justify-content: flex-start;
     align-items: stretch;
     border-bottom: 1px solid var(--figma-color-border);
-    
 }
 
 .panel-toggle-button .icon {
@@ -101,4 +100,13 @@ body {
 
 .button--clipboard.copied {
     background-color: var(--figma-color-bg-success);
+}
+
+.sr-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
