@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 import Icon from './Icons';
 import {copyToClipboard} from 'figx';
 
@@ -25,9 +25,9 @@ interface CodeOutputProps {
 }
 
 const CodeOutput = (props: CodeOutputProps) => {
-    const [output, setOutput] = React.useState<Output>();
-    const [showTailwindConfig, setShowTailwindConfig] = React.useState(true);
-    const [copiedToClipboard, setCopiedToClipboard] = React.useState(false);
+    const [output, setOutput] = useState<Output>();
+    const [showTailwindConfig, setShowTailwindConfig] = useState(true);
+    const [copiedToClipboard, setCopiedToClipboard] = useState(false);
 
     const handleOnClick = async () => {
         let value;
@@ -57,7 +57,7 @@ const CodeOutput = (props: CodeOutputProps) => {
         }, 3000);
     };
 
-    // React.useEffect(() => setCopiedToClipboard(false), [value]);
+    // useEffect(() => setCopiedToClipboard(false), [value]);
 
     const handleCreate = () => {
         parent.postMessage(
@@ -74,11 +74,11 @@ const CodeOutput = (props: CodeOutputProps) => {
         );
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         handleCreate();
     }, [props.outputType, props.fontUnits, props.showColorUnits, props.breakpointName]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         // This is how we read messages sent from the plugin controller
         window.onmessage = ({data: {pluginMessage}}) => {
             setOutput(pluginMessage);

@@ -1,43 +1,41 @@
-import * as React from 'react';
+import React from 'react';
 import PanelToggle from './PanelToggle';
-import stringLookup from './StringLookup'
+import stringLookup from './StringLookup';
 
 interface SettingsProps {
-    outputType: string,
-    setOutputType: React.Dispatch<React.SetStateAction<string>>,
-    showTextStyles: boolean,
-    setShowTextStyles: React.Dispatch<React.SetStateAction<boolean>>,
-    fontUnits: string,
-    setFontUnits: React.Dispatch<React.SetStateAction<string>>,
-    fontBaseSize: number,
-    setFontBaseSize: React.Dispatch<React.SetStateAction<number>>,
-    breakpointName: string,
-    setBreakpointName: React.Dispatch<React.SetStateAction<string>>,
-    breakpointSize: number,
-    setBreakpointSize: React.Dispatch<React.SetStateAction<number>>,
-    showFontImports: boolean,
-    setShowFontImports: React.Dispatch<React.SetStateAction<boolean>>,
-    showColorUnits: boolean,
-    setShowColorUnits: React.Dispatch<React.SetStateAction<boolean>>,
-    colorUnits: string,
-    setColorUnits: React.Dispatch<React.SetStateAction<string>>,
-    showEffects: boolean,
-    setShowEffects: React.Dispatch<React.SetStateAction<boolean>>,
-    showInnerShadows: boolean,
-    setShowInnerShadows: React.Dispatch<React.SetStateAction<boolean>>,
-    showDropShadows: boolean,
-    setShowDropShadows: React.Dispatch<React.SetStateAction<boolean>>,
-    showLayerBlur: boolean,
-    setShowLayerBlur: React.Dispatch<React.SetStateAction<boolean>>,
-    showBackgroundBlur: boolean,
-    setShowBackgroundBlur: React.Dispatch<React.SetStateAction<boolean>>,
+    outputType: string;
+    setOutputType: React.Dispatch<React.SetStateAction<string>>;
+    showTextStyles: boolean;
+    setShowTextStyles: React.Dispatch<React.SetStateAction<boolean>>;
+    fontUnits: string;
+    setFontUnits: React.Dispatch<React.SetStateAction<string>>;
+    fontBaseSize: number;
+    setFontBaseSize: React.Dispatch<React.SetStateAction<number>>;
+    breakpointName: string;
+    setBreakpointName: React.Dispatch<React.SetStateAction<string>>;
+    breakpointSize: number;
+    setBreakpointSize: React.Dispatch<React.SetStateAction<number>>;
+    showFontImports: boolean;
+    setShowFontImports: React.Dispatch<React.SetStateAction<boolean>>;
+    showColorUnits: boolean;
+    setShowColorUnits: React.Dispatch<React.SetStateAction<boolean>>;
+    colorUnits: string;
+    setColorUnits: React.Dispatch<React.SetStateAction<string>>;
+    showEffects: boolean;
+    setShowEffects: React.Dispatch<React.SetStateAction<boolean>>;
+    showInnerShadows: boolean;
+    setShowInnerShadows: React.Dispatch<React.SetStateAction<boolean>>;
+    showDropShadows: boolean;
+    setShowDropShadows: React.Dispatch<React.SetStateAction<boolean>>;
+    showLayerBlur: boolean;
+    setShowLayerBlur: React.Dispatch<React.SetStateAction<boolean>>;
+    showBackgroundBlur: boolean;
+    setShowBackgroundBlur: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SettingsPanel = (props: SettingsProps) => {
-
     return (
         <div className="settings-panel">
-
             {/* <PanelToggle
                 title="Output"
                 active
@@ -77,12 +75,7 @@ const SettingsPanel = (props: SettingsProps) => {
                 </div>
             </PanelToggle> */}
 
-
-            <PanelToggle
-                title="Text Styles"
-                active={props.showTextStyles}
-                toggle={props.setShowTextStyles}
-            >
+            <PanelToggle title="Text Styles" active={props.showTextStyles} toggle={props.setShowTextStyles}>
                 <div className="input_group">
                     {/* <div className="label">Units</div> */}
 
@@ -138,35 +131,39 @@ const SettingsPanel = (props: SettingsProps) => {
                 {props.outputType == stringLookup.tailwind ? (
                     <div className="input_group">
                         <div className="text_input">
-                            <label htmlFor="breakpoint_name" className="label">Breakpoint</label>
-                            <input 
-                                id="breakpoint_name" 
-                                type="text" 
+                            <label htmlFor="breakpoint_name" className="label">
+                                Breakpoint
+                            </label>
+                            <input
+                                id="breakpoint_name"
+                                type="text"
                                 placeholder={props.breakpointName}
                                 value={props.breakpointName}
                                 className="input__field"
-                                onChange={e => props.setBreakpointName(e.target.value)}
+                                onChange={(e) => props.setBreakpointName(e.target.value)}
                             />
                         </div>
-                    </div> ) : ( ''
+                    </div>
+                ) : (
+                    ''
                     // <div className="input_group">
                     //     <div className="range">
                     //         <div className="range_label_wrapper">
                     //             <label htmlFor="breakpoint_size" className="label">Breakpoint Size</label>
                     //             <output className="range_value text--s">{props.breakpointSize}</output><p className="range_unit text--s">px</p>
                     //         </div>
-                    //         <input 
-                    //             id="breakpoint_size" 
-                    //             type="range" 
-                    //             className="input__field" 
-                    //             min="375" 
-                    //             max="1024" 
+                    //         <input
+                    //             id="breakpoint_size"
+                    //             type="range"
+                    //             className="input__field"
+                    //             min="375"
+                    //             max="1024"
                     //             defaultValue={props.breakpointSize}
                     //             onChange={e => props.setBreakpointSize(parseInt(e.target.value, 10))}
                     //         />
                     //     </div>
                     // </div>
-                    )}
+                )}
 
                 {/* <div className="switch">
                     <input 
@@ -179,7 +176,6 @@ const SettingsPanel = (props: SettingsProps) => {
                     />
                     <label className="switch__label" htmlFor="include_font_imports">Include Font Imports</label>
                 </div> */}
-
             </PanelToggle>
 
             {/* <PanelToggle 
@@ -295,8 +291,6 @@ const SettingsPanel = (props: SettingsProps) => {
             </PanelToggle> */}
 
             {/* <PanelToggle title="Form Styles"></PanelToggle> */}
-
-
         </div>
     );
 };

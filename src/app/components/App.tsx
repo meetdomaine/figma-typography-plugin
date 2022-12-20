@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import '../styles/ui.css';
-import '../styles/figma_ui.css'
+import '../styles/figma_ui.css';
 import SettingsPanel from './SettingsPanel';
 import CodeOutput from './CodeOutput';
 import stringLookup from './StringLookup';
@@ -8,21 +8,20 @@ import stringLookup from './StringLookup';
 // declare function require(path: string): any;
 
 const App = ({}) => {
-
-    const [outputType, setOutputType] = React.useState<string>(stringLookup.tailwind);
-    const [showTextStyles, setShowTextStyles] = React.useState<boolean>(true);
-    const [fontUnits, setFontUnits] = React.useState<string>(stringLookup.rem);
-    const [fontBaseSize, setFontBaseSize] = React.useState<number>(16);
-    const [breakpointName, setBreakpointName] = React.useState<string>('sm');
-    const [breakpointSize, setBreakpointSize] = React.useState<number>(768);
-    const [showFontImports, setShowFontImports] = React.useState<boolean>(false);
-    const [showColorUnits, setShowColorUnits] = React.useState<boolean>(false);
-    const [colorUnits, setColorUnits] = React.useState<string>(stringLookup.hex);
-    const [showEffects, setShowEffects] = React.useState<boolean>(false);
-    const [showInnerShadows, setShowInnerShadows] = React.useState<boolean>(false);
-    const [showDropShadows, setShowDropShadows] = React.useState<boolean>(false);
-    const [showLayerBlur, setShowLayerBlur] = React.useState<boolean>(false);
-    const [showBackgroundBlur, setShowBackgroundBlur] = React.useState<boolean>(false);
+    const [outputType, setOutputType] = useState<string>(stringLookup.tailwind);
+    const [showTextStyles, setShowTextStyles] = useState<boolean>(true);
+    const [fontUnits, setFontUnits] = useState<string>(stringLookup.rem);
+    const [fontBaseSize, setFontBaseSize] = useState<number>(16);
+    const [breakpointName, setBreakpointName] = useState<string>('sm');
+    const [breakpointSize, setBreakpointSize] = useState<number>(768);
+    const [showFontImports, setShowFontImports] = useState<boolean>(false);
+    const [showColorUnits, setShowColorUnits] = useState<boolean>(false);
+    const [colorUnits, setColorUnits] = useState<string>(stringLookup.hex);
+    const [showEffects, setShowEffects] = useState<boolean>(false);
+    const [showInnerShadows, setShowInnerShadows] = useState<boolean>(false);
+    const [showDropShadows, setShowDropShadows] = useState<boolean>(false);
+    const [showLayerBlur, setShowLayerBlur] = useState<boolean>(false);
+    const [showBackgroundBlur, setShowBackgroundBlur] = useState<boolean>(false);
 
     return (
         <div className="main">
@@ -31,46 +30,46 @@ const App = ({}) => {
                 setOutputType={setOutputType}
                 showTextStyles={showTextStyles}
                 setShowTextStyles={setShowTextStyles}
-                fontUnits = {fontUnits}
-                setFontUnits = {setFontUnits}
-                fontBaseSize = {fontBaseSize}
-                setFontBaseSize = {setFontBaseSize}
-                breakpointName = {breakpointName}
-                setBreakpointName = {setBreakpointName}
-                breakpointSize = {breakpointSize}
-                setBreakpointSize = {setBreakpointSize}
-                showFontImports = {showFontImports}
-                setShowFontImports = {setShowFontImports}
-                showColorUnits = {showColorUnits}
-                setShowColorUnits = {setShowColorUnits}
-                colorUnits = {colorUnits}
-                setColorUnits = {setColorUnits}
-                showEffects = {showEffects}
-                setShowEffects = {setShowEffects}
-                showInnerShadows = {showInnerShadows}
-                setShowInnerShadows = {setShowInnerShadows}
-                showDropShadows = {showDropShadows}
-                setShowDropShadows = {setShowDropShadows}
-                showLayerBlur = {showLayerBlur}
-                setShowLayerBlur = {setShowLayerBlur}
-                showBackgroundBlur = {showBackgroundBlur}
-                setShowBackgroundBlur = {setShowBackgroundBlur}
+                fontUnits={fontUnits}
+                setFontUnits={setFontUnits}
+                fontBaseSize={fontBaseSize}
+                setFontBaseSize={setFontBaseSize}
+                breakpointName={breakpointName}
+                setBreakpointName={setBreakpointName}
+                breakpointSize={breakpointSize}
+                setBreakpointSize={setBreakpointSize}
+                showFontImports={showFontImports}
+                setShowFontImports={setShowFontImports}
+                showColorUnits={showColorUnits}
+                setShowColorUnits={setShowColorUnits}
+                colorUnits={colorUnits}
+                setColorUnits={setColorUnits}
+                showEffects={showEffects}
+                setShowEffects={setShowEffects}
+                showInnerShadows={showInnerShadows}
+                setShowInnerShadows={setShowInnerShadows}
+                showDropShadows={showDropShadows}
+                setShowDropShadows={setShowDropShadows}
+                showLayerBlur={showLayerBlur}
+                setShowLayerBlur={setShowLayerBlur}
+                showBackgroundBlur={showBackgroundBlur}
+                setShowBackgroundBlur={setShowBackgroundBlur}
             />
-            <CodeOutput 
+            <CodeOutput
                 outputType={outputType}
                 showTextStyles={showTextStyles}
-                fontUnits = {fontUnits}
-                fontBaseSize = {fontBaseSize}
-                breakpointName = {breakpointName}
-                breakpointSize = {breakpointSize}
-                showFontImports = {showFontImports} 
-                showColorUnits = {showColorUnits}
-                colorUnits = {colorUnits}
-                showEffects = {showEffects}
-                showInnerShadows = {showInnerShadows}
-                showDropShadows = {showDropShadows}
-                showLayerBlur = {showLayerBlur}
-                showBackgroundBlur = {showBackgroundBlur}
+                fontUnits={fontUnits}
+                fontBaseSize={fontBaseSize}
+                breakpointName={breakpointName}
+                breakpointSize={breakpointSize}
+                showFontImports={showFontImports}
+                showColorUnits={showColorUnits}
+                colorUnits={colorUnits}
+                showEffects={showEffects}
+                showInnerShadows={showInnerShadows}
+                showDropShadows={showDropShadows}
+                showLayerBlur={showLayerBlur}
+                showBackgroundBlur={showBackgroundBlur}
             />
         </div>
     );
