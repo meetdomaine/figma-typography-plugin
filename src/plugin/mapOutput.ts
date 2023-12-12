@@ -15,7 +15,7 @@ const removeLeadingTrailingCharacters = (str) => {
 
 const getBaseName = (name) =>
     name
-        .replace(/[^a-zA-Z0-9]/g, '-')
+        .replace(/[^a-zA-Z0-9]/g, '')
         .replace(/mobile|desktop/gi, '')
         .toLowerCase();
 
@@ -26,8 +26,11 @@ const getFontStyles = (font, isDesktop, currentStyles, customBreakpoint) => {
     const shouldShowValue = (value) => !!value && (!isDesktop || !currentStyles.includes(value.toLowerCase()));
 
     const styles = getBaseName(font.fontName.style);
-
     const mappedStyles = fontWeights[styles];
+
+    if (!mappedStyles) {
+        return null;
+    }
     const {textCase} = font;
 
     const parsedName = `${breakpointModifier}text-${font.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;

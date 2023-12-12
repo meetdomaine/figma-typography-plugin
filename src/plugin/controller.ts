@@ -31,7 +31,7 @@ figma.ui.onmessage = async ({type, outputType, outputUnits, showColors, customBr
             console.error(
                 "Your fonts could not be generated! Please ensure you have saved text styles. If you're still having issues, please reach out by creating a new issue at https://github.com/codyscott1/figma-typography-plugin/issues . If you could be so kind as to include the error from the console it would be greatly appreciated."
             );
-            console.error(JSON.stringify(error));
+            console.error(error);
         }
     }
 };
